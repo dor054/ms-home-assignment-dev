@@ -3,6 +3,18 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    subscriptionId: 'MSEC_Candidates_Homeworks_new'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: 'df-storage1-rg'
+    location: 'switzerlandnorth'
+    templateLocation: 'URL of the file'
+    csmFileLink: 'https://github.com/dor054/ms-home-assignment-dev/blob/main/ExportedTemplate-df-storage1-rg/template.json'
+    csmParametersFileLink: 'https://github.com/dor054/ms-home-assignment-dev/blob/main/ExportedTemplate-df-storage1-rg/parameters.json'
+    deploymentMode: 'Incremental'
+    
 trigger:
 - main
 
