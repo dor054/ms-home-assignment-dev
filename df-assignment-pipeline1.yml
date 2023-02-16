@@ -14,7 +14,7 @@ steps:
   inputs:
     deploymentScope: 'Subscription'
     subscriptionId: 'MSEC_Candidates_Homeworks_new'
-    azureResourceManagerConnection: 'a8108c2b-496c-424d-8347-ecc8afb6384c'
+    azureResourceManagerConnection: 'MSEC_Candidates_Homeworks_new'
     location: 'switzerlandnorth'
     templateLocation: 'URL of the file'
     csmFileLink: 'https://github.com/dor054/ms-home-assignment-dev/blob/main/template_storage_try1/template.json'
