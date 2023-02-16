@@ -4,7 +4,7 @@
 # https://aka.ms/yaml
 
 trigger:
-- main
+- batch
 
 pool:
   name: Default
@@ -12,8 +12,11 @@ pool:
 steps:
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
-    deploymentScope: 'Subscription'
-    subscriptionId: 'a8108c2b-496c-424d-8347-ecc8afb6384c'
+    azureResourceManagerConnection: 'MSEC_Candidates_Homeworks_new(a8108c2b-496c-424d-8347-ecc8afb6384c)'
+    deploymentScope: 'Resource Group'
+    subscriptionId: 'MSEC_Candidates_Homeworks_new'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: 'df-storage1-rg'
     location: 'switzerlandnorth'
     templateLocation: 'URL of the file'
     csmFileLink: 'https://github.com/dor054/ms-home-assignment-dev/blob/main/template_storage_try1/template.json'
