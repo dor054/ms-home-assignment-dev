@@ -13,7 +13,7 @@ steps:
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: 'Subscription'
-    subscriptionId: 'MSEC_Candidates_Homeworks_new'
+    subscriptionId: 'a8108c2b-496c-424d-8347-ecc8afb6384c'
     ConnectedServiceName: 'MSEC_Candidates_Homeworks_new'
     location: 'switzerlandnorth'
     templateLocation: 'URL of the file'
