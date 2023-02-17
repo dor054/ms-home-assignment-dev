@@ -13,7 +13,7 @@ steps:
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: 'Resource Group'
-    ConnectedServiceName: 'MSEC_Candidates_Homeworks_new'
+    ConnectedServiceName: 'MSEC_Candidates_Homeworks_new(a8108c2b-496c-424d-8347-ecc8afb6384c)'
     subscriptionName: 'a8108c2b-496c-424d-8347-ecc8afb6384c'
     action: 'Create Or Update Resource Group'
     resourceGroupName: 'df-storage1-rg'
