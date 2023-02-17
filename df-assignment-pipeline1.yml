@@ -22,6 +22,7 @@ steps:
     csmFileLink: 'https://github.com/dor054/ms-home-assignment-dev/blob/main/template_storage_try1/template.json'
     csmParametersFileLink: 'https://github.com/dor054/ms-home-assignment-dev/blob/main/template_storage_try1/parameters.json'
     deploymentMode: 'Incremental'
+    deploymentName: 'df_deploy1'
 
 - script: 
     echo Add other tasks to build, test, and deploy your project.
