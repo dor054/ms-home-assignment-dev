@@ -1,5 +1,6 @@
 import os
 import shutil
+import sys
 import time
 
 from azure.storage.blob import BlobServiceClient, BlobLeaseClient
@@ -7,18 +8,18 @@ from azure.core.exceptions import ResourceNotFoundError, ResourceExistsError
 
 
 class VmScript:
-    def __init__(self):
-        self.storage1_connection_string = 'DefaultEndpointsProtocol=https;AccountName=dfstorage12023;AccountKey=0+E9QZpoav9fdDbQZPHkAyJ3NmuF4fG0A8oW5/oDVSKv+zAygx/DQ4P4hVeeyM7PATulvSKE7jBs+AStFQ4F1A==;EndpointSuffix=core.windows.net'
-        self.storage2_connection_string = 'DefaultEndpointsProtocol=https;AccountName=dfstorage22023;AccountKey=xY3oOQRvpGkRUWCVD0wXT0mWudG8lIBzKX3AedUcmCCzx57dzlN1IpqGnl1sPAr9YFRkPbfl+57E+AStCOu6AQ==;EndpointSuffix=core.windows.net'
+    def __init__(self, storage1_connection_string, storage2_connection_string):
+        self.storage1_connection_string = storage1_connection_string
+        self.storage2_connection_string = storage2_connection_string
         self.blobs_local_folder = 'Blobs'
         self.container_name = 'df-container-1'
         self.blob_service_client1 = BlobServiceClient.from_connection_string(self.storage1_connection_string)
         self.blob_service_client2 = BlobServiceClient.from_connection_string(self.storage2_connection_string)
 
     def create_local_blobs(self, blob_num):       
-        shutil.rmtree(self.blobs_local_folder)
-        if not os.path.exists(self.blobs_local_folder):
-            os.makedirs(self.blobs_local_folder)        
+        if os.path.exists(self.blobs_local_folder):
+            shutil.rmtree(self.blobs_local_folder)
+        os.makedirs(self.blobs_local_folder)
         for i in range(1, blob_num+1):
             file_name = ('blob_{}.txt'.format(str(i).zfill(3)))
             with open(os.path.join(self.blobs_local_folder, file_name), 'w') as f:
@@ -88,7 +89,13 @@ class VmScript:
                 print(f"Source blob lease state: {source_blob_properties.lease.state}")
 
 
-script = VmScript()
-script.clear_storages()
-script.upload_blobs_to_storage1()
-script.copy_blobs_from_storage1_to_storage2()
+if __name__ == "__main__":
+    storage1_connection_string = str(sys.argv[1])
+    storage2_connection_string = str(sys.argv[2])
+    script = VmScript(storage1_connection_string, storage2_connection_string)
+    script.create_local_blobs(100)
+    script.clear_storages()
+    script.upload_blobs_to_storage1()
+    script.copy_blobs_from_storage1_to_storage2()
+
+
